@@ -1,0 +1,43 @@
+{
+    "outputFile": "./output/Updated-Receipt",
+    "inputFile": "./templates/Quarter-A4-Receipt-Template.pdf",
+    "numberOfPages": 100,
+    "amountPerPage": 4,
+    "fontFamily": "helv",
+    "fontColour": [
+        1,
+        0,
+        0
+    ],
+    "fontSize": 11.04,
+    "fieldDefintions": [
+        {
+            "fieldName": "receiptNo1",
+            "coordinates": [
+                520,
+                25.4
+            ]
+        },
+        {
+            "fieldName": "receiptNo2",
+            "coordinates": [
+                520,
+                205.4
+            ]
+        },
+        {
+            "fieldName": "receiptNo3",
+            "coordinates": [
+                520,
+                400.4
+            ]
+        },
+        {
+            "fieldName": "receiptNo4",
+            "coordinates": [
+                520,
+                595.4
+            ]
+        }
+    ]
+}
