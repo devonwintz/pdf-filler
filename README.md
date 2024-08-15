@@ -6,7 +6,7 @@ This application automates the process of adding sequential numbers to custom NC
   <img src="./images/Before.PNG" alt="Before Executing the Script">
 </div>
 
-#### After Executing the Script**
+#### After Executing the Script
 <div align="center">
   <img src="./images/After.PNG" alt="After Executing the Script">
 </div>
