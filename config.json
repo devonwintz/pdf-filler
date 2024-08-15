@@ -1,6 +1,6 @@
 {
     "outputFile": "./output/Updated-Receipt",
-    "inputFile": "./templates/Quarter-A4-Receipt-Template.pdf",
+    "inputFile": "./templates/Quarter-A4-Receipt-Template-Blank.pdf",
     "numberOfPages": 100,
     "amountPerPage": 4,
     "fontFamily": "helv",
