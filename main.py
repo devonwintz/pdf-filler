@@ -4,7 +4,7 @@ import pymupdf as fitz
 from datetime import datetime
 
 
-CONFIG_FILE = os.environ.get("CONFIG_FILE", "config.json")
+CONFIG_FILE = os.environ.get("CONFIG_FILE", "receipt_book_config.json")
 
 with open(CONFIG_FILE, "r") as f:
     config = json.load(f)
@@ -15,7 +15,7 @@ new_doc = fitz.open()
 original_page = doc.load_page(0)
 total_iterations = round(config["numberOfPages"] / config["amountPerPage"])
 
-n = 1
+n = config["startingNumber"]
 
 field_definitions = config["fieldDefintions"]
 coordinates = {field["fieldName"]: fitz.Point(
@@ -26,41 +26,22 @@ while n <= config["numberOfPages"]:
     for _ in range(config["amountPerPage"]):
         if n > config["numberOfPages"]:
             break
-        new_page = new_doc.new_page(
-            width=original_page.rect.width, height=original_page.rect.height)
-        new_page.show_pdf_page(new_page.rect, doc, 0)
+        for _ in range(2):
+            new_page = new_doc.new_page(
+                width=original_page.rect.width, height=original_page.rect.height)
+            new_page.show_pdf_page(new_page.rect, doc, 0)
 
-        new_page.insert_text(coordinates["receiptNo1"],
-                             text=f"{n:05}",
-                             fontname=config["fontFamily"],
-                             fontsize=config["fontSize"],
-                             color=tuple(config["fontColour"]),
-                             rotate=0
-                             )
-
-        new_page.insert_text(coordinates["receiptNo2"],
-                             f"{n+1:05}",
-                             fontname=config["fontFamily"],
-                             fontsize=config["fontSize"],
-                             color=tuple(config["fontColour"]),
-                             rotate=0
-                             )
-
-        new_page.insert_text(coordinates["receiptNo3"],
-                             f"{n+2:05}",
-                             fontname=config["fontFamily"],
-                             fontsize=config["fontSize"],
-                             color=tuple(config["fontColour"]),
-                             rotate=0
-                             )
-
-        new_page.insert_text(coordinates["receiptNo4"],
-                             f"{n+3:05}",
-                             fontname=config["fontFamily"],
-                             fontsize=config["fontSize"],
-                             color=tuple(config["fontColour"]),
-                             rotate=0
-                             )
+            for i in range(config["amountPerPage"]):
+                field_name = f"receiptNo{i+1}"
+                if field_name in coordinates:
+                    new_page.insert_text(
+                        coordinates[field_name],
+                        text=f"{n+i:05}",
+                        fontname=config["fontFamily"],
+                        fontsize=config["fontSize"],
+                        color=tuple(config["fontColour"]),
+                        rotate=0
+                    )
 
         n += config["amountPerPage"]
 
